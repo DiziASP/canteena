@@ -1,9 +1,10 @@
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const Profile = () => {
-  const login = true;
+  const [login, setLogin] = useState(true);
 
   return (
     <div className="relative inline-block text-left">
@@ -95,26 +96,42 @@ const Profile = () => {
                         )}
                       </Menu.Item>
                     </div>
+                    <div className="py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#sign-out"
+                            className={`${
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700"
+                            } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
+                            onClick={(e) => handleLogout(e)}
+                          >
+                            Sign out
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </div>
                   </>
                 ) : (
-                  ""
-                )}
-
-                <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
-                        href="#sign-out"
-                        className={`${
-                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                        } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
-                        onClick={(e) => handleLogout(e)}
-                      >
-                        Sign out
-                      </a>
+                      <Link href="/login">
+                        <a
+                          href="#Login"
+                          className={`${
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700"
+                          } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
+                        >
+                          Sign In
+                        </a>
+                      </Link>
                     )}
                   </Menu.Item>
-                </div>
+                )}
               </Menu.Items>
             </Transition>
           </>

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppConfig } from "@/utils/appConfig";
 import Image from "next/image";
 import Profile from "./Profile";
 import Link from "next/link";
 
 function Navbar() {
+  const [login, setLogin] = useState(false);
+
   return (
     <div className="absolute inset-x-0 top-0 mx-auto z-20 flex max-w-screen-xl flex-wrap items-center justify-between py-6 px-4 text-black">
       <Link href="/">
@@ -24,7 +26,7 @@ function Navbar() {
         </div>
       </Link>
       <div className="flex flex-wrap items-center gap-8 text-base">
-        <div id="cart" className="flex items-center">
+        <div id="cart" className={`flex ${login ? "" : "hidden"} items-center`}>
           <Link href="/">
             <button
               className={` rounded-full scale-90 hover:scale-100 hover:opacity-70 ease-in-out duration-300 `}

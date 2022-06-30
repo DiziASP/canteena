@@ -8,14 +8,14 @@ import {
 const FilterCard = ({ filter, onClick }) => {
   return (
     <motion.div
-      onClick={onClick || ""}
+      whileTap={{ scale: 1.3, transition: 0.75 }}
       whileHover={{
         scale: 1.2,
         transition: 0.75,
         color: "#FFFFFF",
         backgroundColor: "rgba(248 113 113)",
       }}
-      className="h-28 w-24 flex flex-col gap-4 justify-center items-center rounded-xl bg-slate-300"
+      className="cursor-pointer h-28 w-24 flex flex-col gap-4 justify-center items-center rounded-xl bg-slate-300"
     >
       {filter === "Date" ? <Calendar size={24} /> : <Alphabet size={24} />}
       <p className="font-semibold">{filter}</p>
