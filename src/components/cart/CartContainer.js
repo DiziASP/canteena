@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
 
@@ -6,6 +6,9 @@ import { motion } from "framer-motion";
 
 const CartContainer = () => {
   const [showCart, setShowCart] = useState(false);
+
+  const [flag, setFlag] = useState(1);
+  const [tot, setTot] = useState(0);
   return (
     <motion.div
       initial={{ opacity: 0, x: 200 }}

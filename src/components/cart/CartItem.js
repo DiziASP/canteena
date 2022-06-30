@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BiMinus, BiPlus } from "react-icons/bi";
+import { motion } from "framer-motion";
 
-export const CartItem = () => {
+let items = [];
+
+const CartItem = ({ item, setFlag, flag }) => {
   return (
-    <div className="flex justify-between lg:justify-start items-center  py-5">
-      <div className="flex flex-row w-2/5">
-        <div className="w-20">
-          <img
-            className="h-24"
-            src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
-            alt=""
-          />
-        </div>
-        <div className="flex flex-col ml-4">
-          <span className="font-semibold text-sm">Iphone 6S</span>
-          <span className="text-red-500 text-xs">Apple</span>
-          <a
-            href="#"
-            className="font-semibold hover:text-red-500 text-gray-500 text-xs"
-          >
-            Remove
-          </a>
-        </div>
+    <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
+      {/* <img
+        src={item?.imageURL}
+        className="w-20 h-20 max-w-[60px] rounded-full object-contain"
+        alt=""
+      /> */}
+
+      {/* name section */}
+      <div className="flex flex-col gap-2">
+        <p className="text-base text-gray-50">
+          {/* {item?.title} */}
+          xxxxxx
+        </p>
+        <p className="text-sm block text-gray-300 font-semibold">
+          {/* IDR {parseFloat(item?.price) * qty} */}
+          IDR XXXXXX
+        </p>
       </div>
 
-      <span className="text-center w-1/5 font-semibold text-sm">
-        IDR 900000
-      </span>
+      {/* button section */}
+      <div className="group flex items-center gap-2 ml-auto cursor-pointer">
+        <motion.div whileTap={{ scale: 0.75 }}>
+          <BiMinus className="text-gray-50 " />
+        </motion.div>
+
+        <p className="w-5 h-5 rounded-sm bg-cartBg text-gray-50 flex items-center justify-center">
+          {/* {qty} */}
+          XXX
+        </p>
+
+        <motion.div whileTap={{ scale: 0.75 }}>
+          <BiPlus className="text-gray-50 " />
+        </motion.div>
+      </div>
     </div>
   );
 };
