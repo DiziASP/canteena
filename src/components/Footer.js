@@ -3,7 +3,7 @@ import { AppConfig } from "@/utils/appConfig";
 export const Footer = () => {
   return (
     <div
-      className="absolute bottom-0 inset-x-0 mt-4 py-4
+      className="absolute bottom-0 py-4
              text-center
              text-sm "
     >

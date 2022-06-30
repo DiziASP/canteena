@@ -1,12 +1,33 @@
+import FilterCard from "@/components/cards/FilterCard";
+import CartContainer from "@/components/cart/CartContainer";
+import ItemContainer from "@/components/ItemContainer";
+import Landing from "@/components/Landing";
 import { MainLayout } from "@/layouts/MainLayout";
 
 export default function Home() {
   return (
     <MainLayout
       meta={{
-        title: "Home | Canteena",
+        title: "Welcome | Canteena",
         description: "Honest store for honest people!",
       }}
-    ></MainLayout>
+    >
+      <div className="min-h-screen py-24 ">
+        {/* Landing Section */}
+        <Landing />
+
+        {/* Filter card */}
+        <div className="flex flex-col gap-8 justify-start p-14 items-start max-w-screen-xl ">
+          <p className="text-2xl font-semibold">Sort By</p>
+          <div className="flex flex-row gap-8">
+            <FilterCard filter="A-Z" />
+            <FilterCard filter="Date" />
+          </div>
+        </div>
+
+        {/* Items Section */}
+        <ItemContainer />
+      </div>
+    </MainLayout>
   );
 }

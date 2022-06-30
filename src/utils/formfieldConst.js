@@ -1,0 +1,100 @@
+const loginFields = [
+  {
+    labelText: "Student ID",
+    labelFor: "student-id",
+    id: "student_id",
+    name: "student_id",
+    type: "text",
+    autoComplete: "text",
+    isRequired: true,
+    placeholder: "Student ID",
+  },
+  {
+    labelText: "Password",
+    labelFor: "password",
+    id: "password",
+    name: "password",
+    type: "password",
+    autoComplete: "current-password",
+    isRequired: true,
+    placeholder: "Password",
+  },
+];
+
+const signupFields = [
+  {
+    labelText: "Username",
+    labelFor: "username",
+    id: "username",
+    name: "username",
+    type: "text",
+    autoComplete: "username",
+    isRequired: true,
+    placeholder: "Username",
+  },
+  {
+    labelText: "Student ID",
+    labelFor: "student-id",
+    id: "student_id",
+    name: "student_id",
+    type: "text",
+    autoComplete: "text",
+    isRequired: true,
+    placeholder: "Student ID",
+  },
+  {
+    labelText: "Password",
+    labelFor: "password",
+    id: "password",
+    name: "password",
+    type: "password",
+    autoComplete: "current-password",
+    isRequired: true,
+    placeholder: "Password",
+  },
+  {
+    labelText: "Confirm Password",
+    labelFor: "confirm-password",
+    id: "confirm_password",
+    name: "confirm_password",
+    type: "password",
+    autoComplete: "confirm-password",
+    isRequired: true,
+    placeholder: "Confirm Password",
+  },
+];
+
+const changePassFields = [
+  {
+    labelText: "OldPassword",
+    labelFor: "old_password",
+    id: "old_password",
+    name: "old_password",
+    type: "password",
+    autoComplete: "current-password",
+    isRequired: true,
+    placeholder: "Old Password",
+  },
+  {
+    labelText: "New Password",
+    labelFor: "New password",
+    id: "new_password",
+    name: "new_password",
+    type: "password",
+    autoComplete: "new-password",
+    isRequired: true,
+    placeholder: "New Password",
+  },
+  {
+    labelText: "Password",
+    labelFor: "password",
+    id: "confirm_password",
+    name: "confirm_password",
+    type: "password",
+    autoComplete: "confirm-new-password",
+    isRequired: true,
+    placeholder: "Confirm New Password",
+  },
+];
+
+export { loginFields, signupFields, changePassFields };

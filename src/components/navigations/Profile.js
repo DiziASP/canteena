@@ -1,18 +1,10 @@
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
-import Router from "next/router";
 
 const Profile = () => {
   const login = true;
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("auth-user");
-      Router.push("/login");
-    }
-  };
   return (
     <div className="relative inline-block text-left">
       <Menu>
@@ -74,7 +66,7 @@ const Profile = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <Link href="/my-item">
+                          <Link href="/add-item">
                             <a
                               className={`${
                                 active
@@ -82,7 +74,7 @@ const Profile = () => {
                                   : "text-gray-700"
                               } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
                             >
-                              Your item
+                              Sell item
                             </a>
                           </Link>
                         )}

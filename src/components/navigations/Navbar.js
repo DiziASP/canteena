@@ -2,7 +2,6 @@ import React from "react";
 import { AppConfig } from "@/utils/appConfig";
 import Image from "next/image";
 import Profile from "./Profile";
-import { CartButton } from "../cart/CartButton";
 import Link from "next/link";
 
 function Navbar() {
@@ -16,8 +15,8 @@ function Navbar() {
           <Image
             src="/assets/images/logo.svg"
             alt="logo"
-            height={40}
-            width={40}
+            height={30}
+            width={30}
           />
           <h1 className="font-primary text-xl md:text-2xl font-bold">
             {AppConfig.title}
@@ -25,12 +24,20 @@ function Navbar() {
         </div>
       </Link>
       <div className="flex flex-wrap items-center gap-8 text-base">
-        <h2 id="cart" className="hidden lg:flex">
-          Hello,&nbsp;
-          <span className="font-bold">John Doe</span>!
-        </h2>
         <div id="cart" className="flex items-center">
-          <CartButton />
+          <Link href="/">
+            <button
+              className={` rounded-full scale-90 hover:scale-100 hover:opacity-70 ease-in-out duration-300 `}
+            >
+              <Image
+                src="/assets/images/cart.svg"
+                alt="Avatar Profile"
+                height={30}
+                width={30}
+                objectFit="cover"
+              />
+            </button>
+          </Link>
         </div>
         <div id="user" className="flex">
           <Profile />
