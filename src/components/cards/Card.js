@@ -15,7 +15,7 @@ const Card = ({ data }) => {
       {/* Item Image */}
       <div className="w-full">
         <Image
-          src="/assets/images/template.jpg"
+          src={data.imgUrl || "/assets/images/no-image.webp"}
           alt="Products"
           width={480}
           height={300}
@@ -29,7 +29,7 @@ const Card = ({ data }) => {
         <div className="flex flex-row font-bold text-blue-400 mb-4 justify-between">
           <p className="flex flex-row">
             <span className="text-sm mr-2">IDR</span>{" "}
-            <span className="text-xl ">XXXXX</span>
+            <span className="text-xl ">{data.price}</span>
           </p>
           <motion.button
             whileHover={{ scale: 1.1, transition: 2 }}
@@ -42,13 +42,12 @@ const Card = ({ data }) => {
         <div className="flex flex-row justify-between">
           <p className="text-gray-500 text-sm">John Doe</p>
           <p className="text-gray-500 text-sm">
-            {new Date().toLocaleDateString()}
+            {data.created_at || "Invalid Date"}
           </p>
         </div>
         <h1 className="font-semibold text-lg mb-2">Lorem Ipsum</h1>
-        <p className="text-gray-500 text-sm w-3/4 mb-4">
-          Lorem Ipsum is Lorem Ipsum, Lorem Ipsum, Lorem Ipsum, Lorem Ipsum,
-          Lorem Ipsum, Lorem Ipsum, Lorem Ips
+        <p className="text-gray-500 text-sm w-3/4 mb-4 break-words">
+          {data.description}
         </p>
       </div>
     </motion.div>

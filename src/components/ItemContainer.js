@@ -1,8 +1,19 @@
-import React from "react";
+import { getAllItems } from "@/utils/FirebaseAPI";
+import React, { useEffect, useState } from "react";
 
 import Card from "./cards/Card";
 
 const ItemContainer = () => {
+  const [item, setItem] = useState([]);
+  const fetchData = async () => {
+    await getAllItems().then((data) => {
+      setItem(data);
+    });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div
       id="shop"
@@ -21,7 +32,9 @@ const ItemContainer = () => {
       {/* Cards */}
       <div className="flex flex-col lg:grid grid-cols-3 gap-8  w-full">
         {/* Card */}
-        <Card />
+        {item.map((item) => (
+          <Card data={item} key={item.id} />
+        ))}
       </div>
     </div>
   );

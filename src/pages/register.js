@@ -5,7 +5,8 @@ import { signupFields } from "@/utils/formfieldConst";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { forwardRef } from "react";
+
+import { saveUser } from "@/utils/FirebaseAPI";
 
 export default function Login() {
   const fields = signupFields;
@@ -16,6 +17,29 @@ export default function Login() {
 
   const handleChange = (e) => {
     setregisState({ ...regisState, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      if (regisState.password !== regisState.confirm_password) {
+        alert(
+          "Please make sure your password and confirm password are correct"
+        );
+        return;
+      }
+      const data = {
+        id: regisState.student_id,
+        username: regisState.username,
+        password: regisState.password,
+        orders: [],
+        balance: 0,
+      };
+      saveUser(data);
+      alert("Data Uploaded successfully 😊");
+    } catch (e) {
+      alert("Error uploading the data: " + e.message);
+    }
   };
 
   return (
@@ -75,6 +99,7 @@ export default function Login() {
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
         bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 
         focus:ring-offset-2 focus:ring-purple-500 mt-10"
+            onClick={(e) => handleSubmit(e)}
           >
             Register
           </button>

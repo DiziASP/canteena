@@ -15,8 +15,15 @@ export const saveItem = async (data) => {
   });
 };
 
+// Saving new user
+export const saveUser = async (data) => {
+  await setDoc(doc(firestore, "users", `${Date.now()}`), data, {
+    merge: true,
+  });
+};
+
 // getall food items
-export const getAllFoodItems = async () => {
+export const getAllItems = async () => {
   const items = await getDocs(
     query(collection(firestore, "items"), orderBy("id", "desc"))
   );

@@ -30,7 +30,7 @@ const Landing = () => {
             Buy Now
           </motion.a>
 
-          <Link href="/login">
+          <Link href="/add-item">
             <motion.a
               whileTap={{ scale: 1.1 }}
               className="flex lg:w-4/12 justify-center
