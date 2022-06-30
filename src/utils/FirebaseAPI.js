@@ -10,9 +10,7 @@ import { firestore } from "@/firebase/clientApp";
 
 // Saving new Item
 export const saveItem = async (data) => {
-  await setDoc(doc(firestore, "items", `${Date.now()}`), data, {
-    merge: true,
-  });
+  await setDoc(doc(firestore, "items", `${Date.now()}`), data);
 };
 
 // Saving new user

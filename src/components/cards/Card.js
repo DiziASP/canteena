@@ -40,12 +40,11 @@ const Card = ({ data }) => {
           </motion.button>
         </div>
         <div className="flex flex-row justify-between">
-          <p className="text-gray-500 text-sm">John Doe</p>
           <p className="text-gray-500 text-sm">
             {data.created_at || "Invalid Date"}
           </p>
         </div>
-        <h1 className="font-semibold text-lg mb-2">Lorem Ipsum</h1>
+        <h1 className="font-semibold text-lg mb-2">{data.name}</h1>
         <p className="text-gray-500 text-sm w-3/4 mb-4 break-words">
           {data.description}
         </p>

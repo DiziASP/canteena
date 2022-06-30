@@ -5,15 +5,23 @@ import {
   BsSortAlphaDown as Alphabet,
 } from "react-icons/bs";
 import { useStateValue } from "@/context/StateProvider";
+import { actionType } from "@/context/reducer";
 
 const FilterCard = ({ filter }) => {
   const [{ items }, dispatch] = useStateValue();
 
   const handleClick = () => {
     const res = items;
-    res.sort((a, b) => a.id - b.id);
-    console.log(res);
+    if (filter == "Date") {
+      res.sort((a, b) => Number(a.id) - Number(b.id));
+    }
+    res.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({
+      type: actionType.SET_ITEMS,
+      items: res,
+    });
   };
+
   return (
     <motion.div
       whileTap={{ scale: 1.3, transition: 0.75 }}
