@@ -1,15 +1,23 @@
+import { useStateValue } from "@/context/StateProvider";
+import { actionType } from "@/context/reducer";
 import { getAllItems } from "@/utils/FirebaseAPI";
 import React, { useEffect, useState } from "react";
 
 import Card from "./cards/Card";
 
 const ItemContainer = () => {
-  const [item, setItem] = useState([]);
+  // const [item, setItem] = useState([]);
+  const [{ items }, dispatch] = useStateValue();
+
   const fetchData = async () => {
     await getAllItems().then((data) => {
-      setItem(data);
+      dispatch({
+        type: actionType.SET_ITEMS,
+        items: data,
+      });
     });
   };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -32,7 +40,7 @@ const ItemContainer = () => {
       {/* Cards */}
       <div className="flex flex-col lg:grid grid-cols-3 gap-8  w-full">
         {/* Card */}
-        {item.map((item) => (
+        {items.map((item) => (
           <Card data={item} key={item.id} />
         ))}
       </div>
