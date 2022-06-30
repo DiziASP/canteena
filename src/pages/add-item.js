@@ -30,12 +30,13 @@ export default function AddItem() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Write product name"
-            className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400 text-textColor"
+            className="w-full h-full text-lg bg-transparent outline-none border-none placeholder:text-gray-400"
           />
         </div>
 
         {/* Product Details */}
         <div className="w-full flex flex-col md:flex-row items-center gap-3">
+          {/* Description */}
           <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
             <MdDescription className="text-gray-700 text-2xl" />
             <input
@@ -48,6 +49,7 @@ export default function AddItem() {
             />
           </div>
 
+          {/* Product Price */}
           <div className="w-full py-2 border-b border-gray-300 flex items-center gap-2">
             <MdAttachMoney className="text-gray-700 text-2xl" />
             <input
@@ -60,7 +62,7 @@ export default function AddItem() {
             />
           </div>
         </div>
-
+        {/* Product Image */}
         <div className="flex items-center w-full">
           <button
             type="button"
