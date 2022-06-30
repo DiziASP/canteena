@@ -5,7 +5,7 @@ import {
   BsSortAlphaDown as Alphabet,
 } from "react-icons/bs";
 
-const FilterCard = ({ filter, onClick }) => {
+const FilterCard = ({ filter }) => {
   return (
     <motion.div
       whileTap={{ scale: 1.3, transition: 0.75 }}
