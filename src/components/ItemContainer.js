@@ -4,7 +4,10 @@ import Card from "./cards/Card";
 
 const ItemContainer = () => {
   return (
-    <div className="flex flex-col gap-8 justify-start px-14 pb-14 items-start max-w-screen-xl ">
+    <div
+      id="shop"
+      className="flex flex-col gap-8 justify-start px-14 pb-14 items-start max-w-screen-xl "
+    >
       <div className="w-full flex items-center justify-between">
         <p
           className="text-2xl font-semibold capitalize text-headingColor relative 

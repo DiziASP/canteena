@@ -19,7 +19,8 @@ const Landing = () => {
         <div className="flex flex-col lg:flex-row justify-start gap-8">
           <motion.a
             href="#shop"
-            whileHover={{ scale: 1.1, transition: 2 }}
+            whileHover={{ opacity: 0.5 }}
+            whileTap={{ scale: 1.1 }}
             className="flex lg:w-4/12 justify-center
         px-6 py-4 bg-blue-400 cursor-pointer
         text-white font-medium text-md 
@@ -31,9 +32,9 @@ const Landing = () => {
 
           <Link href="/login">
             <motion.a
-              whileHover={{ scale: 1.1, transition: 2 }}
+              whileTap={{ scale: 1.1 }}
               className="flex lg:w-4/12 justify-center
-        px-6 py-4 bg-orange-500 cursor-pointer
+        px-6 py-4 bg-indigo-400 cursor-pointer
         text-white font-medium text-md 
         leading-tight rounded-md 
         shadow-md "

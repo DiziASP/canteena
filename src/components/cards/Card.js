@@ -8,7 +8,6 @@ const Card = ({ data }) => {
       whileHover={{
         scale: 1.1,
         transition: 0.75,
-        opacity: 0.6,
       }}
       className="flex flex-col rounded-[2rem] 
                  w-[20rem] cursor-pointer bg-white"
@@ -27,10 +26,19 @@ const Card = ({ data }) => {
 
       {/* Item Content */}
       <div id="cardcontent" className="flex flex-col px-4 py-4">
-        <p className="flex flex-row font-bold text-blue-400 mb-4">
-          <span className="text-sm mr-2">IDR</span>{" "}
-          <span className="text-xl ">XXXXX</span>
-        </p>
+        <div className="flex flex-row font-bold text-blue-400 mb-4 justify-between">
+          <p className="flex flex-row">
+            <span className="text-sm mr-2">IDR</span>{" "}
+            <span className="text-xl ">XXXXX</span>
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.1, transition: 2 }}
+            type="button"
+            className="text-white rounded-lg text-sm p-2 bg-indigo-400"
+          >
+            Add to cart
+          </motion.button>
+        </div>
         <div className="flex flex-row justify-between">
           <p className="text-gray-500 text-sm">John Doe</p>
           <p className="text-gray-500 text-sm">
