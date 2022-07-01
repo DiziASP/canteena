@@ -1,22 +1,36 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
 
 const Card = ({ data }) => {
-  const [{ items, user }, dispatch] = useStateValue();
+  const [{ items, cartItems, user }, dispatch] = useStateValue();
 
   const handleAddToCart = (e) => {
     e.preventDefault();
-    const res = items;
-    res = res.filter((item) => item.id !== data.id);
-    alert("Item added to cart");
-    // dispatch({
-    //   type: actionType.SET_ITEMS,
-    //   items: res,
-    // });
+
+    cartItems.forEach((item) => {
+      if (item.id === data.id) {
+        alert("Item already added to cart");
+        return;
+      }
+    });
+
+    const res = items.find((item) => item.id === data.id);
+
+    if (res) {
+      const newArr = cartItems;
+      newArr.push(res);
+      dispatch({
+        type: actionType.SET_CARTITEMS,
+        cartItems: newArr,
+      });
+    }
   };
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   return (
     <motion.div

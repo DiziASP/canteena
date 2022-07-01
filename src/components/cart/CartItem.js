@@ -1,45 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { motion } from "framer-motion";
+import { useStateValue } from "@/context/StateProvider";
+import { actionType } from "@/context/reducer";
+import { fetchCart } from "@/utils/LocalStorageHandler";
+import Image from "next/image";
 
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {
+  const [{ cartItems }, dispatch] = useStateValue();
+
+  const cartDispatch = () => {
+    localStorage.setItem("cartItems", JSON.stringify(items));
+    dispatch({
+      type: actionType.SET_CARTITEMS,
+      cartItems: items,
+    });
+  };
+
+  const removeItem = () => {
+    const res = cartItems;
+    res = res.filter((data) => data.id !== item.id);
+    dispatch({ type: actionType.REMOVE_ITEM, cartItems: res });
+  };
+
+  useEffect(() => {
+    items = cartItems;
+  }, [items]);
+
   return (
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
-      {/* <img
-        src={item?.imageURL}
-        className="w-20 h-20 max-w-[60px] rounded-full object-contain"
+      <Image
+        src={item?.imgUrl}
+        className="max-w-[60px] rounded-full object-contain"
         alt=""
-      /> */}
+        height={80}
+        width={80}
+      />
 
       {/* name section */}
       <div className="flex flex-col gap-2">
-        <p className="text-base text-gray-50">
-          {/* {item?.title} */}
-          xxxxxx
+        <p className="text-base ">{item?.name}</p>
+        <p className="text-sm block  font-semibold">
+          $ {parseFloat(item?.price)}
         </p>
-        <p className="text-sm block text-gray-300 font-semibold">
-          {/* IDR {parseFloat(item?.price) * qty} */}
-          IDR XXXXXX
-        </p>
-      </div>
-
-      {/* button section */}
-      <div className="group flex items-center gap-2 ml-auto cursor-pointer">
-        <motion.div whileTap={{ scale: 0.75 }}>
-          <BiMinus className="text-gray-50 " />
-        </motion.div>
-
-        <p className="w-5 h-5 rounded-sm bg-cartBg text-gray-50 flex items-center justify-center">
-          {/* {qty} */}
-          XXX
-        </p>
-
-        <motion.div whileTap={{ scale: 0.75 }}>
-          <BiPlus className="text-gray-50 " />
-        </motion.div>
       </div>
     </div>
   );
 };
+
+export default CartItem;
