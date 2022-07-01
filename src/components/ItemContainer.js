@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import Card from "./cards/Card";
 
 const ItemContainer = () => {
-  // const [item, setItem] = useState([]);
   const [{ items }, dispatch] = useStateValue();
 
   const fetchData = async () => {

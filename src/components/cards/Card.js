@@ -1,8 +1,23 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import { useStateValue } from "@/context/StateProvider";
+import { actionType } from "@/context/reducer";
 
 const Card = ({ data }) => {
+  const [{ items }, dispatch] = useStateValue();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    const res = items;
+    res = res.filter((item) => item.id !== data.id);
+
+    // dispatch({
+    //   type: actionType.SET_ITEMS,
+    //   items: res,
+    // });
+  };
+
   return (
     <motion.div
       whileHover={{
@@ -33,6 +48,7 @@ const Card = ({ data }) => {
           </p>
           <motion.button
             whileHover={{ scale: 1.1, transition: 2 }}
+            onClick={(e) => handleAddToCart(e)}
             type="button"
             className="text-white rounded-lg text-sm p-2 bg-indigo-400"
           >
