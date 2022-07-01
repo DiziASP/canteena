@@ -5,12 +5,14 @@ import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
 import { motion } from "framer-motion";
 import CartItem from "./CartItem";
+import { saveUser } from "@/utils/FirebaseAPI";
+import { useRouter } from "next/router";
 
 const CartContainer = () => {
   const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
   const [total, setTot] = useState(0);
-
+  const router = useRouter();
   const clearCart = () => {
     dispatch({
       type: actionType.SET_CARTITEMS,
@@ -27,6 +29,28 @@ const CartContainer = () => {
     setTot(totalPrice);
     console.log(cartItems);
   }, [total, flag, cartItems]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    try {
+      if (Number(user.balance) - Number(total) <= 0) {
+        alert("Insufficient Balance");
+        return;
+      }
+      const data = {
+        balance: Number(user.balance) - Number(total),
+        orders: cartItems,
+      };
+      saveUser(data);
+      alert("Purchase Successful");
+      router.reload();
+    } catch (e) {
+      alert("Error uploading the data: " + e.message);
+    }
+    // 2. Remove Balance
+    // 3. Add User Orders
+  };
 
   return (
     <motion.div
@@ -80,13 +104,14 @@ const CartContainer = () => {
           <div className="w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-center justify-evenly px-8 py-2">
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-700 text-xl font-semibold">Total</p>
-              <p className="text-gray-700 text-xl font-semibold">${total}</p>
+              <p className="text-gray-700 text-xl font-semibold">IDR {total}</p>
             </div>
 
             {user ? (
               <motion.button
                 whileTap={{ scale: 0.8 }}
                 type="button"
+                onClick={(e) => handleSubmit(e)}
                 className="w-full p-2 rounded-xl bg-gradient-to-tr from-blue-400 to-blue-600 text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Check Out

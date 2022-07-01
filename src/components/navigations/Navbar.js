@@ -5,12 +5,21 @@ import Profile from "./Profile";
 import Link from "next/link";
 import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
+import { getUser } from "@/utils/FirebaseAPI";
 
 function Navbar() {
   const [{ items, user, cartShow }, dispatch] = useStateValue();
-
+  const updateUser = async () => {
+    try {
+      await getUser(user).then((data) => {
+        console.log(data);
+      });
+    } catch (err) {
+      console.log("Error getting user " + err.message);
+    }
+  };
   useEffect(() => {
-    console.log(user);
+    updateUser();
   }, []);
 
   return (

@@ -1,6 +1,7 @@
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -36,4 +37,15 @@ export const getAllUsers = async () => {
   );
 
   return items.docs.map((doc) => doc.data());
+};
+
+//  get specific users
+export const getUser = async (data) => {
+  const docSnap = await getDoc(doc(firestore, "users", `${data.id}`));
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    console.log("No such document!");
+  }
 };
