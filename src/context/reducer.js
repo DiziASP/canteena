@@ -7,8 +7,6 @@ export const actionType = {
 };
 
 const reducer = (state, action) => {
-  // console.log(action);
-
   switch (action.type) {
     case actionType.SET_USER:
       return {
@@ -37,7 +35,7 @@ const reducer = (state, action) => {
     case actionType.REMOVE_ITEM:
       return {
         ...state,
-        items: action.items,
+        cartItems: action.items,
       };
 
     default:

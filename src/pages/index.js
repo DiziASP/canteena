@@ -2,9 +2,12 @@ import FilterCard from "@/components/cards/FilterCard";
 import CartContainer from "@/components/cart/CartContainer";
 import ItemContainer from "@/components/ItemContainer";
 import Landing from "@/components/Landing";
+import { useStateValue } from "@/context/StateProvider";
 import { MainLayout } from "@/layouts/MainLayout";
 
 export default function Home() {
+  const [{ items, user, cartShow }, dispatch] = useStateValue();
+
   return (
     <MainLayout
       meta={{
@@ -27,6 +30,8 @@ export default function Home() {
 
         {/* Items Section */}
         <ItemContainer />
+
+        {cartShow && <CartContainer />}
       </div>
     </MainLayout>
   );

@@ -1,10 +1,10 @@
 import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { useStateValue } from "@/context/StateProvider";
 import { useRouter } from "next/router";
 import { actionType } from "@/context/reducer";
+
 const Profile = () => {
   const [{ items, user }, dispatch] = useStateValue();
 
@@ -19,6 +19,7 @@ const Profile = () => {
     });
     router.reload();
   };
+
   return (
     <div className="relative inline-block text-left">
       <Menu>
