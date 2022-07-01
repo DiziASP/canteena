@@ -23,7 +23,7 @@ export const saveUser = async (data) => {
 // getall food items
 export const getAllItems = async () => {
   const items = await getDocs(
-    query(collection(firestore, "items"), orderBy("id", "desc"))
+    query(collection(firestore, "items"), orderBy("name", "asc"))
   );
 
   return items.docs.map((doc) => doc.data());

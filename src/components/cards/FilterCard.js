@@ -14,8 +14,9 @@ const FilterCard = ({ filter }) => {
     const res = items;
     if (filter == "Date") {
       res.sort((a, b) => Number(a.id) - Number(b.id));
+    } else if (filter == "A-Z") {
+      res.sort((a, b) => a.name.localeCompare(b.name));
     }
-    res.sort((a, b) => a.name.localeCompare(b.name));
     dispatch({
       type: actionType.SET_ITEMS,
       items: res,
