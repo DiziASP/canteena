@@ -5,13 +5,13 @@ import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
 
 const Card = ({ data }) => {
-  const [{ items }, dispatch] = useStateValue();
+  const [{ items, user }, dispatch] = useStateValue();
 
   const handleAddToCart = (e) => {
     e.preventDefault();
     const res = items;
     res = res.filter((item) => item.id !== data.id);
-
+    alert("Item added to cart");
     // dispatch({
     //   type: actionType.SET_ITEMS,
     //   items: res,
@@ -49,6 +49,7 @@ const Card = ({ data }) => {
           <motion.button
             whileHover={{ scale: 1.1, transition: 2 }}
             onClick={(e) => handleAddToCart(e)}
+            disabled={!user ? true : false}
             type="button"
             className="text-white rounded-lg text-sm p-2 bg-indigo-400"
           >

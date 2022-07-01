@@ -33,6 +33,7 @@ const Landing = () => {
           <Link href="/add-item">
             <motion.a
               whileTap={{ scale: 1.1 }}
+              whileHover={{ opacity: 0.5 }}
               className="flex lg:w-4/12 justify-center
         px-6 py-4 bg-indigo-400 cursor-pointer
         text-white font-medium text-md 

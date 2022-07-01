@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./cards/Card";
 
 const ItemContainer = () => {
-  const [{ items }, dispatch] = useStateValue();
+  const [{ items, user }, dispatch] = useStateValue();
 
   const fetchData = async () => {
     await getAllItems().then((data) => {

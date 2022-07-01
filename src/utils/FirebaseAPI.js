@@ -15,15 +15,24 @@ export const saveItem = async (data) => {
 
 // Saving new user
 export const saveUser = async (data) => {
-  await setDoc(doc(firestore, "users", `${Date.now()}`), data, {
+  await setDoc(doc(firestore, "users", `${data.studentID}`), data, {
     merge: true,
   });
 };
 
-// getall food items
+// get all items
 export const getAllItems = async () => {
   const items = await getDocs(
     query(collection(firestore, "items"), orderBy("name", "asc"))
+  );
+
+  return items.docs.map((doc) => doc.data());
+};
+
+// get all users
+export const getAllUsers = async () => {
+  const items = await getDocs(
+    query(collection(firestore, "users"), orderBy("id", "asc"))
   );
 
   return items.docs.map((doc) => doc.data());

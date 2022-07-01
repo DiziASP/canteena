@@ -2,10 +2,23 @@ import { Menu, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import { useStateValue } from "@/context/StateProvider";
+import { useRouter } from "next/router";
+import { actionType } from "@/context/reducer";
 const Profile = () => {
-  const [login, setLogin] = useState(true);
+  const [{ items, user }, dispatch] = useStateValue();
 
+  const router = useRouter();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    dispatch({
+      type: actionType.SET_USER,
+      user: null,
+    });
+    router.reload();
+  };
   return (
     <div className="relative inline-block text-left">
       <Menu>
@@ -41,12 +54,12 @@ const Profile = () => {
                 static
                 className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
               >
-                {login ? (
+                {user ? (
                   <>
                     <div className="px-4 py-3">
                       <p className="text-sm leading-5 text-black">Balance</p>
                       <p className="text-sm  leading-5 font-bold text-gray-900 truncate">
-                        IDR 99999999
+                        IDR {user.balance}
                       </p>
                     </div>
                     <div className="py-1">

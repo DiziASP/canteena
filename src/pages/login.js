@@ -5,8 +5,14 @@ import { loginFields } from "@/utils/formfieldConst";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useStateValue } from "@/context/StateProvider";
+import { getAllUsers } from "@/utils/FirebaseAPI";
+import { actionType } from "@/context/reducer";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter();
+
   const fields = loginFields;
   let fieldsState = {};
   fields.forEach((field) => (fieldsState[field.id] = ""));
@@ -15,6 +21,37 @@ export default function Login() {
 
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
+  };
+
+  const [{ user }, dispatch] = useStateValue();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (loginState.student_id === "" || loginState.password === "") {
+      alert("Please fill all fields");
+      return;
+    }
+
+    await getAllUsers().then((data) => {
+      const userLogged = data.find((user) => user.id === loginState.student_id);
+      if (userLogged !== undefined) {
+        if (userLogged.password === loginState.password) {
+          alert("Login Successful");
+          dispatch({
+            type: actionType.SET_USER,
+            user: userLogged,
+          });
+          localStorage.setItem("user", JSON.stringify(userLogged));
+          router.push("/");
+          return;
+        }
+        alert("Incorrect Password");
+        return;
+      }
+      alert("User not found. Are you sure your data is correct?");
+      return;
+    });
   };
   return (
     <MainLayout
@@ -68,9 +105,9 @@ export default function Login() {
 
         {/* Submit Button */}
         <motion.div whileTap={{ scale: 0.6 }}>
-          {" "}
           <button
             type="button"
+            onClick={(e) => handleLogin(e)}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
         bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 
         focus:ring-offset-2 focus:ring-purple-500 mt-10"
