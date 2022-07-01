@@ -95,7 +95,7 @@ export default function AddItem() {
         description: "Honest store for honest people!",
       }}
     >
-      <div className="w-[90%] md:w-[50%] border border-gray-300 shadow-md rounded-lg p-4 flex flex-col items-center justify-center gap-8">
+      <div className="w-[90%] md:w-[50%] border border-gray-300 shadow-md rounded-lg p-4 flex flex-col items-center justify-center gap-8 bg-gray-50">
         <h1 className="font-semibold text-3xl">Sell your item!</h1>
 
         {/* Product Name */}

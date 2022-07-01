@@ -1,7 +1,12 @@
-import HistoryCard from "@/components/cards/HistoryCard";
+import HistoryCard from "@/components/cards/HistoryContainer";
 import { MainLayout } from "@/layouts/MainLayout";
+import { useStateValue } from "@/context/StateProvider";
+import { useEffect, useState } from "react";
 
 export default function History() {
+  const [{ user }, dispatch] = useStateValue();
+  const [history, setHistory] = useState();
+
   return (
     <MainLayout
       meta={{
@@ -18,7 +23,6 @@ export default function History() {
         </p>
         <div className="flex flex-col gap-8">
           {/* History Card */}
-          <HistoryCard />
           <HistoryCard />
         </div>
       </div>
