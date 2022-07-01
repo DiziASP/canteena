@@ -62,7 +62,13 @@ export default function AddItem() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (name === "" || description === "" || price === "") {
+      if (
+        name === "" ||
+        description === "" ||
+        price === "" ||
+        imageAsset === null ||
+        imageAsset === ""
+      ) {
         alert("Please make sure all fields are not empty");
         return;
       }
@@ -146,6 +152,7 @@ export default function AddItem() {
                 type="file"
                 name="uploadimage"
                 accept="image/*"
+                required
                 onChange={(e) => setUploadImg(e.target.files[0])}
                 className="w-0 h-0"
               />

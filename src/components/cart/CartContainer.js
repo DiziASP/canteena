@@ -5,7 +5,7 @@ import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
 import { motion } from "framer-motion";
 import CartItem from "./CartItem";
-import { saveUser } from "@/utils/FirebaseAPI";
+import { updateUser } from "@/utils/FirebaseAPI";
 import { useRouter } from "next/router";
 
 const CartContainer = () => {
@@ -13,6 +13,7 @@ const CartContainer = () => {
   const [flag, setFlag] = useState(1);
   const [total, setTot] = useState(0);
   const router = useRouter();
+
   const clearCart = () => {
     dispatch({
       type: actionType.SET_CARTITEMS,
@@ -27,8 +28,7 @@ const CartContainer = () => {
       return acc + Number(item.price);
     }, 0);
     setTot(totalPrice);
-    console.log(cartItems);
-  }, [total, flag, cartItems]);
+  }, [cartItems]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,18 +38,28 @@ const CartContainer = () => {
         alert("Insufficient Balance");
         return;
       }
+
+      let res = user.orders.slice();
+      res.push(...cartItems);
+
       const data = {
+        ...user,
         balance: Number(user.balance) - Number(total),
-        orders: cartItems,
+        orders: res,
       };
-      saveUser(data);
-      alert("Purchase Successful");
-      router.reload();
+      updateUser(data).then((result) => {
+        dispatch({
+          type: actionType.SET_CARTITEMS,
+          cartItems: [],
+        });
+        localStorage.setItem("cartItems", JSON.stringify([]));
+        localStorage.setItem("user", JSON.stringify(data));
+        alert("Purchase Successful");
+        router.reload();
+      });
     } catch (e) {
       alert("Error uploading the data: " + e.message);
     }
-    // 2. Remove Balance
-    // 3. Add User Orders
   };
 
   return (

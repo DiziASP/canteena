@@ -9,18 +9,6 @@ import { getUser } from "@/utils/FirebaseAPI";
 
 function Navbar() {
   const [{ items, user, cartShow }, dispatch] = useStateValue();
-  const updateUser = async () => {
-    try {
-      await getUser(user).then((data) => {
-        console.log(data);
-      });
-    } catch (err) {
-      console.log("Error getting user " + err.message);
-    }
-  };
-  useEffect(() => {
-    updateUser();
-  }, []);
 
   return (
     <div className="absolute inset-x-0 top-0 mx-auto z-20 flex max-w-screen-xl flex-wrap items-center justify-between py-6 px-4 text-black">

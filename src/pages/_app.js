@@ -3,6 +3,7 @@ import reducer from "@/context/reducer";
 import { StateProvider } from "@/context/StateProvider";
 import "@/styles/globals.css";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 function MyApp({ Component, pageProps }) {
   return (
     <AnimatePresence exitBeforeEnter>

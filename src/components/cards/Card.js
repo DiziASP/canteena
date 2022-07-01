@@ -10,23 +10,19 @@ const Card = ({ data }) => {
   const handleAddToCart = (e) => {
     e.preventDefault();
 
-    cartItems.forEach((item) => {
-      if (item.id === data.id) {
-        alert("Item already added to cart");
-        return;
-      }
-    });
+    if (cartItems.includes(data)) {
+      alert("Item already in the cart");
+      return;
+    }
 
     const res = items.find((item) => item.id === data.id);
 
-    if (res) {
-      const newArr = cartItems;
-      newArr.push(res);
-      dispatch({
-        type: actionType.SET_CARTITEMS,
-        cartItems: newArr,
-      });
-    }
+    let newArr = cartItems.slice();
+    newArr.push(res);
+    dispatch({
+      type: actionType.SET_CARTITEMS,
+      cartItems: newArr,
+    });
   };
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -44,7 +40,11 @@ const Card = ({ data }) => {
       {/* Item Image */}
       <div className="w-full">
         <Image
-          src={data.imgUrl || "/assets/images/no-image.webp"}
+          src={
+            data.imgUrl || data.imgUrl !== ""
+              ? data.imgUrl
+              : "/assets/images/no-image.png"
+          }
           alt="Products"
           width={480}
           height={300}
@@ -62,6 +62,7 @@ const Card = ({ data }) => {
           </p>
           <motion.button
             whileHover={{ scale: 1.1, transition: 2 }}
+            whileTap={{ scale: 1.2 }}
             onClick={(e) => handleAddToCart(e)}
             disabled={!user ? true : false}
             type="button"

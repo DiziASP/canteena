@@ -13,7 +13,9 @@ const HistoryCard = () => {
         </div>
         <div className="flex flex-col gap-1">
           <h2 className="font-medium">Total Amount</h2>
-          <p className="text-base font-semibold text-black ">IDR 99999</p>
+          <p className="text-base font-semibold text-black text-end ">
+            IDR 99999
+          </p>
         </div>
       </div>
 

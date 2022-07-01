@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 import { saveUser } from "@/utils/FirebaseAPI";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const fields = signupFields;
@@ -18,7 +19,7 @@ export default function Login() {
   const handleChange = (e) => {
     setregisState({ ...regisState, [e.target.id]: e.target.value });
   };
-
+  const router = useRouter();
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
@@ -36,7 +37,8 @@ export default function Login() {
         balance: 0,
       };
       saveUser(data);
-      alert("Data Uploaded successfully 😊");
+      alert("Account registered. Please sign in now.");
+      router.push("/");
     } catch (e) {
       alert("Error uploading the data: " + e.message);
     }

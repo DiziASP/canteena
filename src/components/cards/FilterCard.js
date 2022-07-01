@@ -13,7 +13,7 @@ const FilterCard = ({ filter }) => {
   const handleClick = () => {
     const res = items;
     if (filter == "Date") {
-      res.sort((a, b) => Number(a.id) - Number(b.id));
+      res.sort((a, b) => Number(b.id) - Number(a.id));
     } else if (filter == "A-Z") {
       res.sort((a, b) => a.name.localeCompare(b.name));
     }

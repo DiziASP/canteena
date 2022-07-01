@@ -16,7 +16,14 @@ export const saveItem = async (data) => {
 
 // Saving new user
 export const saveUser = async (data) => {
-  await setDoc(doc(firestore, "users", `${data.studentID}`), data, {
+  await setDoc(doc(firestore, "users", `${data.id}`), data, {
+    merge: true,
+  });
+};
+
+// Update user
+export const updateUser = async (data) => {
+  await setDoc(doc(firestore, "users", `${data.id}`), data, {
     merge: true,
   });
 };
