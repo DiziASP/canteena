@@ -19,14 +19,33 @@ export default function Login() {
   const handleChange = (e) => {
     setregisState({ ...regisState, [e.target.id]: e.target.value });
   };
+
   const router = useRouter();
+  const validateStudentID = (studentID) => {
+    let key = studentID.slice(0, 3);
+    let piv = Number(studentID.slice(3));
+
+    let res = 0;
+    for (let i = 0; i < key.length; i++) {
+      res += Number(key[i]);
+    }
+
+    if (res === piv) {
+      return true;
+    }
+    return false;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (regisState.password !== regisState.confirm_password) {
-        alert(
-          "Please make sure your password and confirm password are correct"
-        );
+      if (
+        regisState.password !== regisState.confirm_password ||
+        regisState.username === "" ||
+        regisState.password === "" ||
+        regisState.confirm_password === "" ||
+        regisState.student_id
+      ) {
+        alert("Please make sure your inputs are correct");
         return;
       }
       const data = {
@@ -38,7 +57,7 @@ export default function Login() {
       };
       saveUser(data);
       alert("Account registered. Please sign in now.");
-      router.push("/");
+      // router.push("/");
     } catch (e) {
       alert("Error uploading the data: " + e.message);
     }
