@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AppConfig } from "@/utils/appConfig";
+import { AppConfig } from "../utils/appConfig";
 import Image from "next/image";
 import Profile from "./Profile";
 import Link from "next/link";

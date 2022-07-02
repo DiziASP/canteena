@@ -1,5 +1,5 @@
 import React from "react";
-import { AppConfig } from "@/utils/appConfig";
+import { AppConfig } from "../utils/appConfig";
 export const Footer = () => {
   return (
     <div
