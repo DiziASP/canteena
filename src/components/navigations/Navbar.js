@@ -17,12 +17,6 @@ function Navbar() {
           id="brand"
           className="flex flex-row items-center gap-2 font-bold text-lg cursor-pointer"
         >
-          <Image
-            src="/assets/images/logo.svg"
-            alt="logo"
-            height={30}
-            width={30}
-          />
           <h1 className="font-primary text-xl md:text-2xl font-bold">
             {AppConfig.title}
           </h1>

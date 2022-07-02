@@ -50,6 +50,7 @@ const Profile = () => {
       router.reload();
     });
   };
+
   return (
     <div className="relative inline-block text-left">
       <Menu>
@@ -100,7 +101,7 @@ const Profile = () => {
                             type="text"
                             id="balance"
                             onChange={(e) => setBalance(e.target.value)}
-                            className="w-3/4 border rounded-lg"
+                            className="w-3/4 border rounded-lg p-2 py-1 text-xs"
                           />
                         </form>
                         <div className="flex justify-start gap-4">
