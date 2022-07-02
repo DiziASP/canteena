@@ -38,16 +38,28 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (
-        regisState.password !== regisState.confirm_password ||
-        regisState.username === "" ||
-        regisState.password === "" ||
-        regisState.confirm_password === "" ||
-        regisState.student_id
-      ) {
-        alert("Please make sure your inputs are correct");
+      if (regisState.password !== regisState.confirm_password) {
+        alert(
+          "Please make sure your password field matched the confirm password field"
+        );
         return;
       }
+      if (!validateStudentID(regisState.student_id)) {
+        alert(
+          "Student ID is not valid. Please make sure your input is correct"
+        );
+        return;
+      }
+      if (
+        regisState.username === "" ||
+        regisState.student_id === "" ||
+        regisState.password === "" ||
+        regisState.confirm_password === ""
+      ) {
+        alert("Please fill all the fields.");
+        return;
+      }
+
       const data = {
         id: regisState.student_id,
         username: regisState.username,
@@ -56,8 +68,8 @@ export default function Login() {
         balance: 0,
       };
       saveUser(data);
-      alert("Account registered. Please sign in now.");
-      // router.push("/");
+      alert("Account has been registered. Sign in now");
+      router.push("/login");
     } catch (e) {
       alert("Error uploading the data: " + e.message);
     }

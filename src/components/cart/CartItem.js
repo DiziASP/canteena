@@ -26,7 +26,7 @@ const CartItem = ({ item, setFlag, flag }) => {
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex flex-row justify-between items-center gap-2">
       <div className="flex flex-row items-center gap-4">
         <Image
-          src={item?.imgUrl}
+          src={item.imgUrl}
           className="max-w-[60px] rounded-full object-contain"
           alt=""
           height={80}

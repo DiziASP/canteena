@@ -11,6 +11,10 @@ import { useEffect } from "react";
 export default function Home() {
   const [{ items, user, cartShow }, dispatch] = useStateValue();
 
+  useEffect(() => {
+    console.log(user);
+    console.log(items);
+  }, [items, user]);
   return (
     <MainLayout
       meta={{
