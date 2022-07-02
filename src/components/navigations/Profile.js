@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useStateValue } from "@/context/StateProvider";
 import { useRouter } from "next/router";
 import { actionType } from "@/context/reducer";
+import { BsPlusCircleFill, BsPatchMinusFill } from "react-icons/bs";
+import { useState } from "react";
+import { updateUser } from "@/utils/FirebaseAPI";
 
 const Profile = () => {
   const [{ items, user }, dispatch] = useStateValue();
-
+  const [balance, setBalance] = useState("");
   const router = useRouter();
 
   const handleLogout = (e) => {
@@ -20,6 +23,33 @@ const Profile = () => {
     router.reload();
   };
 
+  const handleBalance = (e, param) => {
+    e.preventDefault();
+    if (balance === "") {
+      alert("Balance field is empty");
+      return;
+    }
+    if (Number(user.balance) - Number(balance) < 0 && param !== "add") {
+      alert("Balance cannot be less than zero");
+      return;
+    }
+    const data =
+      param === "add"
+        ? {
+            ...user,
+            balance: Number(user.balance) + Number(balance),
+          }
+        : {
+            ...user,
+            balance: Number(user.balance) - Number(balance),
+          };
+    updateUser(data).then((result) => {
+      dispatch({ type: actionType.SET_USER, user: data });
+      localStorage.setItem("user", JSON.stringify(data));
+      alert("Balance updated successfully");
+      router.reload();
+    });
+  };
   return (
     <div className="relative inline-block text-left">
       <Menu>
@@ -62,6 +92,28 @@ const Profile = () => {
                       <p className="text-sm  leading-5 font-bold text-gray-900 truncate">
                         IDR {user.balance}
                       </p>
+
+                      {/* Add Balance Field */}
+                      <div className="flex flex-col justify-between gap-2 mt-4">
+                        <form>
+                          <input
+                            type="text"
+                            id="balance"
+                            onChange={(e) => setBalance(e.target.value)}
+                            className="w-3/4 border rounded-lg"
+                          />
+                        </form>
+                        <div className="flex justify-start gap-4">
+                          <BsPatchMinusFill
+                            className="cursor-pointer"
+                            onClick={(e) => handleBalance(e, "remove")}
+                          />
+                          <BsPlusCircleFill
+                            className="cursor-pointer"
+                            onClick={(e) => handleBalance(e, "add")}
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div className="py-1">
                       <Menu.Item>
