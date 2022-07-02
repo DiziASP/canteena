@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { saveUser } from "@/utils/FirebaseAPI";
 import { useRouter } from "next/router";
+import { getAllUsers } from "@/utils/FirebaseAPI";
 
 export default function Login() {
   const fields = signupFields;
@@ -35,7 +36,7 @@ export default function Login() {
     }
     return false;
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (regisState.password !== regisState.confirm_password) {
@@ -67,9 +68,17 @@ export default function Login() {
         orders: [],
         balance: 0,
       };
-      saveUser(data);
-      alert("Account has been registered. Sign in now");
-      router.push("/login");
+      await getAllUsers().then((res) => {
+        if (res.find((item) => item.id === regisState.student_id)) {
+          alert("User with this id already exists. Please try again");
+          return;
+        } else {
+          saveUser(data).then((res) => {
+            alert("Account has been registered. Sign in now");
+            router.push("/");
+          });
+        }
+      });
     } catch (e) {
       alert("Error uploading the data: " + e.message);
     }
