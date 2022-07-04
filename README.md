@@ -1,11 +1,10 @@
 <div align="center">
-
+Cancel changes
   <h3 align="center">Canteena Site</h3>
 
   <p align="center">
     A website where you can buy and sell anything without worries
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />
   </p>
 </div>
