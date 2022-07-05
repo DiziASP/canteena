@@ -11,6 +11,9 @@ import { useRouter } from "next/router";
 import { getAllUsers } from "@/utils/FirebaseAPI";
 
 export default function Login() {
+  const router = useRouter(); // Initiate Router
+
+  // Form Field Variables
   const fields = signupFields;
   let fieldsState = {};
   fields.forEach((field) => (fieldsState[field.id] = ""));
@@ -21,7 +24,6 @@ export default function Login() {
     setregisState({ ...regisState, [e.target.id]: e.target.value });
   };
 
-  const router = useRouter();
   const validateStudentID = (studentID) => {
     let key = studentID.slice(0, 3);
     let piv = Number(studentID.slice(3));
@@ -36,6 +38,7 @@ export default function Login() {
     }
     return false;
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -68,6 +71,7 @@ export default function Login() {
         orders: [],
         balance: 0,
       };
+
       await getAllUsers().then((res) => {
         if (res.find((item) => item.id === regisState.student_id)) {
           alert("User with this id already exists. Please try again");
@@ -75,7 +79,7 @@ export default function Login() {
         } else {
           saveUser(data).then((res) => {
             alert("Account has been registered. Sign in now");
-            router.push("/");
+            router.push("/login");
           });
         }
       });
@@ -103,18 +107,20 @@ export default function Login() {
           />
         </Link>
 
-        <h1 className="text-center font-bold text-4xl">Create your account</h1>
-        <p className="text-center text-lg">
+        <h1 className="text-center font-bold text-3xl lg:text-4xl">
+          Create your account
+        </h1>
+        <p className="text-center text-base lg:text-lg">
           Already have an account?{" "}
           <Link href="/login">
-            <span className="font-semibold text-purple-500 cursor-pointer">
+            <span className="font-semibold text-pastel-purple cursor-pointer">
               Sign In
             </span>
           </Link>
         </p>
 
         {/* Input */}
-        <form className="mt-8 space-y-6">
+        <form className="mt-6 space-y-6">
           <div>
             {fields.map((field) => (
               <Input
@@ -130,17 +136,24 @@ export default function Login() {
                 placeholder={field.placeholder}
               />
             ))}
+
+            {!validateStudentID(regisState.student_id) && (
+              <p className="text-sm font-medium text-pastel-white bg-red-500 text-center px-4 py-2 rounded-lg">
+                Student ID must be : first digit + second digit + third digit =
+                2 last digits
+              </p>
+            )}
           </div>
         </form>
 
         {/* Submit Button */}
-        <motion.div whileTap={{ scale: 0.6 }}>
+        <motion.div whileTap={{ scale: 0.6 }} whileHover={{ scale: 1.1 }}>
           {" "}
           <button
             type="button"
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
-        bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 
-        focus:ring-offset-2 focus:ring-purple-500 mt-10"
+            bg-pastel-purple focus:outline-none focus:ring-2 
+        focus:ring-offset-2 focus:ring-pastel-purple mt-10"
             onClick={(e) => handleSubmit(e)}
           >
             Register

@@ -17,16 +17,15 @@ module.exports = {
       "6xl": "4rem",
     },
     extend: {
-      fontFamily: {
-        poppins: ["Poppins", ...defaultTheme.fontFamily.sans],
-      },
       colors: {
-        "pastel-cream": "#fcf8ec",
+        "pastel-dgreen": "#388087",
         "pastel-black": "#3a3d36",
-        "pastel-green": "#badb84",
-        "pastel-blue": "#76c7ca",
+        "pastel-green": "#C2EDCE",
+        "pastel-blue": "#BADFE7",
+        "pastel-dblue": "#6fb3b8",
         "pastel-purple": "#6184D8",
-        "pastel-white": "#F9F8F4",
+        "pastel-white": "#F6F6F2",
+        "pastel-lwhite": "#DEDECF",
       },
     },
   },

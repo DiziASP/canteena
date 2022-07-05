@@ -6,6 +6,8 @@ import {
   orderBy,
   query,
   setDoc,
+  deleteDoc,
+  WriteBatch,
 } from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
 
@@ -54,5 +56,12 @@ export const getUser = async (data) => {
     return docSnap.data();
   } else {
     console.log("No such document!");
+  }
+};
+
+// Delete Item
+export const deleteCartItem = async (data) => {
+  for (let i = 0; i < data.length; i++) {
+    await deleteDoc(doc(firestore, "items", `${data[i].id}`));
   }
 };

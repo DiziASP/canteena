@@ -10,7 +10,7 @@ const Input = ({
   placeholder,
 }) => {
   return (
-    <div className="my-5">
+    <div className="my-6">
       <label htmlFor={labelFor} className="sr-only">
         {labelText}
       </label>
@@ -21,9 +21,9 @@ const Input = ({
         name={name}
         type={type}
         required={isRequired}
-        className="rounded-md appearance-none relative block w-full px-3 py-2 border 
+        className="rounded-md text-sm lg:text-base appearance-none relative block w-full px-3 py-4 border 
         border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none 
-        focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+        focus:ring-pastel-purple focus:border-pastel-purple focus:z-10 sm:text-sm"
         placeholder={placeholder}
       />
     </div>

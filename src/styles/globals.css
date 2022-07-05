@@ -9,12 +9,14 @@
 @layer base {
   html {
     @apply scroll-smooth;
-    @apply font-poppins;
   }
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Poppins", Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .svg-bg-landing {
   background-image: url("/assets/images/web-bg.svg");
-
   background-attachment: fixed;
 }

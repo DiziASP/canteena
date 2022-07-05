@@ -72,20 +72,20 @@ export default function Login() {
             alt=""
           />
         </Link>
-        <h1 className="text-center font-bold text-4xl">
+        <h1 className="text-center font-bold text-3xl lg:text-4xl">
           Login to your account
         </h1>
-        <p className="text-center text-lg">
+        <p className="text-center text-base lg:text-lg">
           Don{"'"}t have an account?{" "}
           <Link href="/register">
-            <span className="font-semibold text-purple-500 cursor-pointer">
+            <span className="font-semibold text-pastel-purple cursor-pointer">
               Sign Up
             </span>
           </Link>
         </p>
 
         {/* Input */}
-        <form className="mt-8 space-y-6">
+        <form className="mt-4 space-y-8">
           <div>
             {fields.map((field) => (
               <Input
@@ -105,13 +105,13 @@ export default function Login() {
         </form>
 
         {/* Submit Button */}
-        <motion.div whileTap={{ scale: 0.6 }}>
+        <motion.div whileTap={{ scale: 0.6 }} whileHover={{ scale: 1.1 }}>
           <button
             type="button"
             onClick={(e) => handleLogin(e)}
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white 
-        bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 
-        focus:ring-offset-2 focus:ring-purple-500 mt-10"
+            bg-pastel-purple focus:outline-none focus:ring-2 
+        focus:ring-offset-2 focus:ring-pastel-purple mt-10"
           >
             Login
           </button>

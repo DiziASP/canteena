@@ -11,10 +11,6 @@ import { useEffect } from "react";
 export default function Home() {
   const [{ items, user, cartShow }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    console.log(user);
-    console.log(items);
-  }, [items, user]);
   return (
     <MainLayout
       meta={{
@@ -27,7 +23,7 @@ export default function Home() {
         <Landing />
 
         {/* Filter card */}
-        <div className="flex flex-col gap-8 justify-start p-14 items-start max-w-screen-xl ">
+        <div className="flex flex-col gap-8 justify-start p-14 items-center lg:items-start max-w-screen-xl ">
           <p className="text-2xl font-semibold">Sort By</p>
           <div className="flex flex-row gap-8">
             <FilterCard filter="A-Z" />
