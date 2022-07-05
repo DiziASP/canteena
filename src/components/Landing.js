@@ -2,8 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useStateValue } from "@/context/StateProvider";
 
 const Landing = () => {
+  const [{ items, user }, dispatch] = useStateValue();
+
   return (
     <div className="w-full flex flex-col lg:flex-row p-14 items-center justify-between max-w-screen-xl">
       {/* Landings */}
@@ -29,20 +32,23 @@ const Landing = () => {
           >
             Buy Now
           </motion.a>
-
-          <Link href="/add-item">
-            <motion.a
-              whileTap={{ scale: 1.1 }}
-              whileHover={{ opacity: 0.5 }}
-              className="flex lg:w-4/12 justify-center
+          {!user ? (
+            ""
+          ) : (
+            <Link href="/add-item">
+              <motion.a
+                whileTap={{ scale: 1.1 }}
+                whileHover={{ opacity: 0.5 }}
+                className="flex lg:w-4/12 justify-center
         px-6 py-4 bg-indigo-400 cursor-pointer
         text-white font-medium text-md 
         leading-tight rounded-md 
         shadow-md "
-            >
-              Sell Item
-            </motion.a>
-          </Link>
+              >
+                Sell Item
+              </motion.a>
+            </Link>
+          )}
         </div>
       </div>
       {/* Logo GIF */}

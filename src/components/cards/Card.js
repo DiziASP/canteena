@@ -60,16 +60,19 @@ const Card = ({ data }) => {
             <span className="text-sm mr-2">IDR</span>{" "}
             <span className="text-xl ">{data.price}</span>
           </p>
-          <motion.button
-            whileHover={{ scale: 1.1, transition: 2 }}
-            whileTap={{ scale: 1.2 }}
-            onClick={(e) => handleAddToCart(e)}
-            disabled={!user ? true : false}
-            type="button"
-            className="text-white rounded-lg text-sm p-2 bg-indigo-400"
-          >
-            Add to cart
-          </motion.button>
+          {!user ? (
+            ""
+          ) : (
+            <motion.button
+              whileHover={{ scale: 1.1, transition: 2 }}
+              whileTap={{ scale: 1.2 }}
+              onClick={(e) => handleAddToCart(e)}
+              type="button"
+              className="text-white rounded-lg text-sm p-2 bg-indigo-400"
+            >
+              Add to cart
+            </motion.button>
+          )}
         </div>
         <div className="flex flex-row justify-between">
           <p className="text-gray-500 text-sm">
