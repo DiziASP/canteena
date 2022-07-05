@@ -5,11 +5,18 @@ import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
 import { motion } from "framer-motion";
 import CartItem from "./CartItem";
-import { updateUser } from "@/utils/FirebaseAPI";
+import {
+  deleteCartItem,
+  getAllItems,
+  saveItem,
+  updateUser,
+} from "@/utils/FirebaseAPI";
 import { useRouter } from "next/router";
+import { deleteDoc, doc } from "firebase/firestore";
+import { firestore } from "@/firebase/clientApp";
 
 const CartContainer = () => {
-  const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+  const [{ items, user, cartShow, cartItems }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
   const [total, setTot] = useState(0);
   const router = useRouter();
@@ -30,7 +37,7 @@ const CartContainer = () => {
     setTot(totalPrice);
   }, [cartItems]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -47,7 +54,8 @@ const CartContainer = () => {
         balance: Number(user.balance) - Number(total),
         orders: res,
       };
-      updateUser(data).then((result) => {
+
+      updateUser(data).then(() => {
         dispatch({
           type: actionType.SET_CARTITEMS,
           cartItems: [],
