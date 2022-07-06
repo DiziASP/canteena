@@ -13,7 +13,7 @@ import { firestore } from "@/firebase/clientApp";
 
 // Saving new Item
 export const saveItem = async (data) => {
-  await setDoc(doc(firestore, "items", `${Date.now()}`), data);
+  await setDoc(doc(firestore, "items", `${data.id}`), data);
 };
 
 // Saving new user
