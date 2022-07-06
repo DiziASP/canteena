@@ -5,8 +5,10 @@ import { useStateValue } from "@/context/StateProvider";
 import { useRouter } from "next/router";
 import { actionType } from "@/context/reducer";
 import { BsPlusCircleFill, BsPatchMinusFill } from "react-icons/bs";
-import { useState } from "react";
-import { updateUser } from "@/utils/FirebaseAPI";
+import { useEffect, useState } from "react";
+import { getAllUsers, getUser, updateUser } from "@/utils/FirebaseAPI";
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "@/firebase/clientApp";
 
 const Profile = () => {
   const [{ items, user }, dispatch] = useStateValue();
@@ -51,6 +53,24 @@ const Profile = () => {
     });
   };
 
+  const fetchUser = async () => {
+    const locUser = user !== null ? user : {};
+
+    await getDoc(doc(firestore, "users", `${locUser.id}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        const userLogged = snapshot.data();
+        dispatch({
+          type: actionType.SET_USER,
+          user: userLogged,
+        });
+      } else {
+        console.log("User not found");
+      }
+    });
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <div className="relative inline-block text-left">
       <Menu>

@@ -36,7 +36,7 @@ const Card = ({ data }) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    console.log(data);
+    const res = data;
   }, [cartItems]);
 
   return (
