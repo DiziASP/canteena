@@ -44,7 +44,7 @@ export default function Login() {
     try {
       if (regisState.password !== regisState.confirm_password) {
         alert(
-          "Please make sure your password field matched the confirm password field"
+          "Please make sure your password field matched the confirm password fields"
         );
         return;
       }
