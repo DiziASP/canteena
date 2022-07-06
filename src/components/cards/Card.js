@@ -18,6 +18,11 @@ const Card = ({ data }) => {
       return;
     }
 
+    if (data?.seller.id === user?.id) {
+      alert("You can't buy this product because you're the seller!");
+      return;
+    }
+
     const res = items.find((item) => item.id === data.id);
 
     let newArr = cartItems.slice();
@@ -31,6 +36,7 @@ const Card = ({ data }) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    console.log(data);
   }, [cartItems]);
 
   return (
@@ -83,13 +89,15 @@ const Card = ({ data }) => {
           <p className="text-pastel-black text-sm">
             {data.created_at || "Invalid Date"}
           </p>
-          <p className="text-pastel-black text-sm">{data?.seller.name || ""}</p>
+          <p className="text-pastel-black text-sm">
+            {data?.seller.username || ""}
+          </p>
         </div>
         <h1 className="text-black font-semibold text-lg mb-2">{data.name}</h1>
         <p className="text-pastel-black  text-sm w-3/4 mb-4 break-words">
           {data.description}
         </p>
-        {data?.seller.id === user.id && (
+        {data?.seller.id === user?.id && (
           <motion.button
             whileHover={{ scale: 1.1, transition: 2 }}
             whileTap={{ scale: 1.2 }}

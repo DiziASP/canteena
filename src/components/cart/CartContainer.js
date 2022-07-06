@@ -41,7 +41,7 @@ const CartContainer = () => {
     e.preventDefault();
 
     try {
-      if (Number(user.balance) - Number(total) <= 0) {
+      if (Number(user.balance) - Number(total) < 0) {
         alert("Insufficient Balance");
         return;
       }

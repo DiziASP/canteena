@@ -52,16 +52,23 @@ export const getAllUsers = async () => {
 export const getUser = async (data) => {
   const docSnap = await getDoc(doc(firestore, "users", `${data.id}`));
 
-  if (docSnap.exists()) {
-    return docSnap.data();
-  } else {
-    console.log("No such document!");
-  }
+  return docSnap.data();
 };
 
 // Delete Item
 export const deleteCartItem = async (data) => {
   for (let i = 0; i < data.length; i++) {
+    await setDoc(
+      doc(firestore, "users", `${data[i].seller.id}`),
+      {
+        ...data[i].seller,
+        balance: Number(data[i].seller.balance) + Number(data[i].price),
+      },
+      {
+        merge: true,
+      }
+    );
+
     await deleteDoc(doc(firestore, "items", `${data[i].id}`));
   }
 };
