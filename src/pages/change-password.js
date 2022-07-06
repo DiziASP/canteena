@@ -84,8 +84,9 @@ export default function ChangePassword() {
         </div>
         <motion.button
           whileTap={{ scale: 1.2 }}
+          whileHover={{ scale: 1.1 }}
           onClick={(e) => handleSubmit(e)}
-          className="bg-purple-400 px-4 py-2 rounded-xl font-semibold text-sm mx-auto"
+          className="bg-pastel-purple py-4 px-8 rounded-lg font-semibold text-sm text-pastel-white mx-auto"
         >
           Save Change
         </motion.button>

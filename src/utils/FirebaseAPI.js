@@ -6,12 +6,14 @@ import {
   orderBy,
   query,
   setDoc,
+  deleteDoc,
+  WriteBatch,
 } from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
 
 // Saving new Item
 export const saveItem = async (data) => {
-  await setDoc(doc(firestore, "items", `${Date.now()}`), data);
+  await setDoc(doc(firestore, "items", `${data.id}`), data);
 };
 
 // Saving new user
@@ -54,5 +56,12 @@ export const getUser = async (data) => {
     return docSnap.data();
   } else {
     console.log("No such document!");
+  }
+};
+
+// Delete Item
+export const deleteCartItem = async (data) => {
+  for (let i = 0; i < data.length; i++) {
+    await deleteDoc(doc(firestore, "items", `${data[i].id}`));
   }
 };
