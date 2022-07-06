@@ -1,3 +1,4 @@
+import { useStateValue } from "@/context/StateProvider";
 import { storage } from "@/firebase/clientApp";
 import { MainLayout } from "@/layouts/MainLayout";
 import { saveItem } from "@/utils/FirebaseAPI";
@@ -20,6 +21,8 @@ import {
 } from "react-icons/md";
 
 export default function AddItem() {
+  const [{ items, cartItems, user }, dispatch] = useStateValue();
+
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -78,11 +81,13 @@ export default function AddItem() {
         description: description,
         price: price,
         imgUrl: imageAsset,
+        seller: user,
         created_at: new Date().toLocaleDateString(),
       };
-      saveItem(data);
-      alert("Data Uploaded successfully");
-      router.push("/");
+      saveItem(data).then(() => {
+        alert("Data Uploaded successfully");
+        router.push("/");
+      });
     } catch (e) {
       alert("Error uploading the data: " + e.message);
     }

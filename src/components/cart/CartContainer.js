@@ -12,7 +12,7 @@ import {
   updateUser,
 } from "@/utils/FirebaseAPI";
 import { useRouter } from "next/router";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { firestore } from "@/firebase/clientApp";
 
 const CartContainer = () => {
@@ -56,14 +56,16 @@ const CartContainer = () => {
       };
 
       updateUser(data).then(() => {
-        dispatch({
-          type: actionType.SET_CARTITEMS,
-          cartItems: [],
+        deleteCartItem(cartItems).then(() => {
+          dispatch({
+            type: actionType.SET_CARTITEMS,
+            cartItems: [],
+          });
+          localStorage.setItem("cartItems", JSON.stringify([]));
+          localStorage.setItem("user", JSON.stringify(data));
+          alert("Purchase Successful");
+          router.reload();
         });
-        localStorage.setItem("cartItems", JSON.stringify([]));
-        localStorage.setItem("user", JSON.stringify(data));
-        alert("Purchase Successful");
-        router.reload();
       });
     } catch (e) {
       alert("Error uploading the data: " + e.message);
