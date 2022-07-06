@@ -3,10 +3,13 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useStateValue } from "@/context/StateProvider";
 import { actionType } from "@/context/reducer";
+import { deleteDoc, doc } from "firebase/firestore";
+import { Router, useRouter } from "next/router";
+import { firestore } from "@/firebase/clientApp";
 
 const Card = ({ data }) => {
   const [{ items, cartItems, user }, dispatch] = useStateValue();
-
+  const router = useRouter();
   const handleAddToCart = (e) => {
     e.preventDefault();
 
@@ -80,11 +83,29 @@ const Card = ({ data }) => {
           <p className="text-pastel-black text-sm">
             {data.created_at || "Invalid Date"}
           </p>
+          <p className="text-pastel-black text-sm">{data?.seller.name || ""}</p>
         </div>
         <h1 className="text-black font-semibold text-lg mb-2">{data.name}</h1>
         <p className="text-pastel-black  text-sm w-3/4 mb-4 break-words">
           {data.description}
         </p>
+        {data?.seller.id === user.id && (
+          <motion.button
+            whileHover={{ scale: 1.1, transition: 2 }}
+            whileTap={{ scale: 1.2 }}
+            onClick={(e) => {
+              e.preventDefault();
+              deleteDoc(doc(firestore, "items", `${data.id}`)).then(() => {
+                alert("Item Deleted Successfully");
+                router.reload();
+              });
+            }}
+            type="button"
+            className="text-pastel-white rounded-lg text-sm p-2 bg-red-400"
+          >
+            Remove Item
+          </motion.button>
+        )}
       </div>
     </motion.div>
   );
