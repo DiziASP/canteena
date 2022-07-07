@@ -14,7 +14,7 @@ const Card = ({ data }) => {
     e.preventDefault();
 
     if (cartItems.includes(data)) {
-      alert("Item already in the cart");
+      alert("Item is already in the cart");
       return;
     }
 

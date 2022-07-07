@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useStateValue } from "@/context/StateProvider";
 import { useRouter } from "next/router";
 import { actionType } from "@/context/reducer";
-import { BsPlusCircleFill, BsPatchMinusFill } from "react-icons/bs";
+import { BsCash } from "react-icons/bs";
+import { GiTakeMyMoney } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { getAllUsers, getUser, updateUser } from "@/utils/FirebaseAPI";
 import { doc, getDoc } from "firebase/firestore";
@@ -109,6 +110,9 @@ const Profile = () => {
                 {user ? (
                   <>
                     <div className="px-4 py-3">
+                      <p className="text-base leading-5 text-black mb-2">
+                        Hi, <span className="font-bold">{user?.username}!</span>
+                      </p>
                       <p className="text-sm leading-5 text-black">Balance</p>
                       <p className="text-sm  leading-5 font-bold text-gray-900 truncate">
                         IDR {user.balance}
@@ -121,15 +125,15 @@ const Profile = () => {
                             type="text"
                             id="balance"
                             onChange={(e) => setBalance(e.target.value)}
-                            className="w-3/4 border rounded-lg p-2 py-1 text-xs"
+                            className="w-full border rounded-lg p-2 py-1 text-xs"
                           />
                         </form>
-                        <div className="flex justify-start gap-4">
-                          <BsPatchMinusFill
+                        <div className="flex justify-evenly gap-4">
+                          <GiTakeMyMoney
                             className="cursor-pointer"
                             onClick={(e) => handleBalance(e, "remove")}
                           />
-                          <BsPlusCircleFill
+                          <BsCash
                             className="cursor-pointer"
                             onClick={(e) => handleBalance(e, "add")}
                           />

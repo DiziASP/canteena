@@ -61,7 +61,14 @@ export default function Login() {
         description: "Honest store for honest people!",
       }}
     >
-      <div className="flex flex-col gap-2 ">
+      <div
+        className="flex flex-col gap-2 "
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleLogin(e);
+          }
+        }}
+      >
         {/* Header */}
         <Link href="/">
           <Image
