@@ -5,13 +5,13 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB_TVLAB8dqpr13-iNnejxXLqMbWM1jBv0",
-  authDomain: "canteena-58c0c.firebaseapp.com",
-  projectId: "canteena-58c0c",
-  storageBucket: "canteena-58c0c.appspot.com",
-  messagingSenderId: "711810495806",
-  appId: "1:711810495806:web:f0215444bb1231645e686f",
-  measurementId: "G-E1187SSC58",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
